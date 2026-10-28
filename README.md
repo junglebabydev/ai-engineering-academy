@@ -2,7 +2,7 @@
 
 [Open the academy](https://junglebabydev.github.io/ai-engineering-academy/?edition=2) · [Start lesson 1](https://junglebabydev.github.io/ai-engineering-academy/?edition=2#lesson/1)
 
-Learn the complete AI engineering curriculum by gradually building a parent-facing activity concierge. Designed for a learner familiar with ChatGPT, spreadsheets, website builders, Zapier or n8n, without assuming a programming background. The existing editorial design is retained.
+Learn general AI engineering concepts first, then apply them by gradually building a parent-facing activity concierge. Designed for a learner familiar with ChatGPT, spreadsheets, website builders, Zapier or n8n, without assuming a programming background. The existing editorial design is retained.
 
 ## The same six curriculum areas
 
@@ -13,7 +13,7 @@ Learn the complete AI engineering curriculum by gradually building a parent-faci
 5. Production reliability, security, privacy and cost.
 6. System design, capstone, business assessment and interview practice.
 
-Each of the 36 lessons has a parent scenario, plain-language explanation, analogy, two defined terms, a worked comparison, a short activity with a self-check, a build card, two quiz questions with explanations, and a recall/explanation prompt. Linked reminders revisit earlier lessons. The original technical explanations and examples remain collapsed as optional depth. Six cumulative milestones build one concierge agent rather than six unrelated projects.
+Each of the 36 lessons leads with a general topic title, simple definition, mechanism, importance, defined terms, an everyday worked example, and a concept-explanation exercise. A separate expandable “Apply to Jungle” section contains the parent scenario, project activity, self-check, and build card. Two quiz questions check application of the ideas. Linked reminders revisit earlier lessons. The original technical explanations and examples remain collapsed as optional depth. Six cumulative milestones build one concierge agent rather than six unrelated projects.
 
 The Jungle connection is informed by a review of the user-provided marketplace and booking-system repositories, plus related agent/search/tool code. The public course uses original explanations and fictional records, not copied private source code, credentials or customer records. Code review is not a verification of production behaviour.
 
@@ -44,7 +44,7 @@ Completion, latest quiz attempts, activity worksheets, recall answers, notes and
 
 Use **Progress & setup → Export progress JSON** regularly. Import validates the data and asks before replacing current progress. New exports include any archived earlier-edition progress. Notes can contain personal information; handle backups appropriately.
 
-Edition 1 notes, completion and quiz records are preserved as a separate archive when loaded or imported. They are not counted as completion or mastery of rewritten content. The archive can be read and separately exported from Progress & setup. Old-tab storage events are handled to keep an earlier tab from replacing new worksheets while the new edition is open. Close old academy tabs and revisit online when upgrading; keep a JSON backup.
+The concept-first revision keeps edition-2 progress, quiz answers and writing in place. Earlier responses may refer to earlier wording. Edition 1 notes, completion and quiz records are preserved as a separate archive when loaded or imported. They are not counted as completion or mastery of rewritten content. The archive can be read and separately exported from Progress & setup. Old-tab storage events are handled to keep an earlier tab from replacing new worksheets while the new edition is open. Close old academy tabs and revisit online when upgrading; keep a JSON backup.
 
 Lesson completion is self-attested. Quiz mastery means both latest submitted answers are correct. Written activities and recall answers are saved but are not automatically graded or a certificate.
 
@@ -59,7 +59,7 @@ python3 rewrite_curriculum.py
 python3 build.py
 ```
 
-The authoring script uses `technical-foundations.json` as its retained original reference. The generated `curriculum.json` is embedded along with `beginner.js`, `beginner.css`, and all files in `agent-build-pack/` into one `index.html`. `template.html` holds the common layout, navigation, storage and utilities. If editing only presentation or build-pack files, run `python3 build.py`.
+The authoring script uses `technical-foundations.json` as its retained original reference and `concept_lessons.py` for the project-independent teaching layer. The generated `curriculum.json` is embedded along with `beginner.js`, `beginner.css`, and all files in `agent-build-pack/` into one `index.html`. `template.html` holds the common layout, navigation, storage and utilities. If editing only presentation or build-pack files, run `python3 build.py`.
 
 Bump `CACHE_VERSION` in `sw.js` for a new published edition. Commit generated HTML with its sources. GitHub Pages publishes the revision. The single-file app allows a new worker to activate once its full page is cached; reload online to obtain a new edition. Save progress first.
 

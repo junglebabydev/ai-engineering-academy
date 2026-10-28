@@ -1,0 +1,15 @@
+{
+  "edition": 2,
+  "revision": 3,
+  "count": 8,
+  "checks": [
+    "all 36 definitions and general explanations are project-independent",
+    "all original technical topics retained",
+    "all lesson activities and quiz answers retained",
+    "current edition-2 progress and writing survive without reset",
+    "every lesson leads with definition, mechanism and everyday example before project application",
+    "lesson navigation expands the separate project section",
+    "concept-first views fit mobile and desktop",
+    "no runtime errors in revised lesson interactions"
+  ]
+}

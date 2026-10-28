@@ -827,6 +827,8 @@ for l in lessons:l['jungleConnection']=connections.get(l['id'],'This lesson appl
 D['lessons']=lessons;D['edition']=2
 # Use accessible definitions; exact technical reading remains in the optional lesson sections.
 D['glossary'].update({'Embedding':'A learned numerical representation that helps compare inputs, such as related parent requests. Similarity does not prove suitability.', 'Agent harness':'The working environment around the model: tools, rules, memory, limits, logs, and recovery.', 'RAG':'Retrieval-augmented generation: find relevant information and give it to the model before it writes an answer.', 'Precision':'Of the things you selected or labelled positive, how many were actually right?', 'Recall':'Of the relevant or positive things that existed in your labels, how many did you find?', 'MCP':'A standard connection protocol between AI applications and external capabilities. It does not grant trust or permission.', 'Idempotency':'Repeating a request for one logical action has the same intended effect as doing it once.', 'Token':'A model-specific piece of text; it is not reliably the same thing as a word.', 'Trace':'A connected activity trail for one request, showing steps, outcomes, and timing.', 'Fine-tuning':'Further training that changes a model’s internal settings. It is different from giving the model current catalogue records.'})
+from concept_lessons import apply
+apply(D)
 assert len(lessons)==36 and all(len(l['quiz'])==2 for l in lessons)
 (R/'curriculum.json').write_text(json.dumps(D,ensure_ascii=False,indent=2))
 print('Authored 36 beginner lessons, 72 new quizzes, 35 linked recall prompts, six cumulative agent milestones.')

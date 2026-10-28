@@ -17,7 +17,7 @@ with sync_playwright() as p:
  page.on('request',lambda req: requests.append(req.url))
  page.goto(URL); page.wait_for_load_state('networkidle')
  check('36 lessons / 72 questions / 40 terms embedded',lambda:assert_(page.evaluate('DATA.lessons.length===36 && DATA.lessons.every(l=>l.quiz.length===2) && Object.keys(DATA.glossary).length===40')))
- check('all lessons substantive and references valid',lambda:assert_(page.evaluate('DATA.lessons.every(l=>l.concepts.join(" ").split(/\\s+/).length>80 && l.scene && l.terms.length===2 && l.technical.length===3 && l.steps.length===3 && l.code.length>100 && l.refs.every(k=>DATA.refs[k]))')))
+ check('all lessons substantive and references valid',lambda:assert_(page.evaluate('DATA.lessons.every(l=>(l.definition+" "+l.concepts.join(" ")).split(/\\s+/).length>80 && l.scene && l.terms.length===2 && l.technical.length===3 && l.steps.length===3 && l.code.length>100 && l.refs.every(k=>DATA.refs[k]))')))
  page.screenshot(path=str(ROOT/'preview-desktop.png'),full_page=True)
  # Visit every lesson and submit both correct answers using the visible form.
  for id in range(1,37):

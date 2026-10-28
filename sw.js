@@ -1,5 +1,5 @@
 /* Offline cache for the optional hosted edition. Not used for file://. */
-const CACHE_VERSION = '2';
+const CACHE_VERSION = '3';
 const PREFIX = 'ai-academy:' + encodeURIComponent(self.registration.scope) + ':';
 const CACHE = PREFIX + CACHE_VERSION;
 self.addEventListener('install', event => {

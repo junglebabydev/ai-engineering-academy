@@ -16,7 +16,7 @@ with tempfile.TemporaryDirectory(prefix='.qa-upgrade-',dir=R) as tmp:
   page.evaluate('localStorage.setItem(KEY, JSON.stringify({version:1,completed:[1],answers:{"1-0":1},notes:{"1":"Saved before upgrade"},projects:{},lastLesson:1}))')
   for name in ['index.html','sw.js']:folder.joinpath(name).write_bytes((R/name).read_bytes())
   page.evaluate('navigator.serviceWorker.getRegistration().then(r=>r.update())')
-  page.wait_for_function('caches.keys().then(keys=>keys.some(k=>k.endsWith(":2")))')
+  page.wait_for_function('caches.keys().then(keys=>keys.some(k=>k.endsWith(":3")))')
   page.reload();page.wait_for_function('DATA.edition===2')
   assert page.evaluate('state.completed.length===0 && state.legacy.notes[1]==="Saved before upgrade"')
   page.evaluate('state.activities[1]="New worksheet";persist()')

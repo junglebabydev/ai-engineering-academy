@@ -15,7 +15,7 @@ with sync_playwright() as p:
  page.goto(URL+'#guide');page.get_by_text('Read earlier lesson notes',exact=True).click();check('earlier notes readable and safely escaped','Earlier note <script>' in page.locator('body').inner_text() and page.locator('#main script').count()==0)
  with page.expect_download() as dl:page.locator('#export-legacy').click()
  path=R/'test-legacy.json';dl.value.save_as(path);check('earlier-edition JSON export preserves original notes',json.loads(path.read_text())['notes']==legacy['notes']);path.unlink()
- page.goto(URL+'#lesson/7');page.locator('#activity-response').fill('My activity attempt <img src=x>');page.locator('#recall-response').fill('Facts need sources and dates.')
+ page.goto(URL+'#lesson/7');page.locator('#application > summary').click();page.locator('#activity-response').fill('My activity attempt <img src=x>');page.locator('#recall-response').fill('Facts need sources and dates.')
  page.reload();check('activity and recall writing survive reload',page.locator('#activity-response').input_value()=='My activity attempt <img src=x>' and page.locator('#recall-response').input_value()=='Facts need sources and dates.')
  check('technical depth and answers begin collapsed',not page.locator('#technical').evaluate('(e)=>e.open') and not page.locator('#exercise + .lab-box details').evaluate('(e)=>e.open'))
  page.locator('[data-complete="7"]').click();page.goto(URL+'#review');check('recall practice uses completed lessons and saved writing','Facts need sources' in page.locator('textarea[data-recall="7"]').input_value())

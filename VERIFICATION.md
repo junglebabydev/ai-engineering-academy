@@ -28,6 +28,10 @@ Direct file mode checks that the app makes no HTTP requests. Local HTTP mode che
 
 `verify_upgrade.py` loads the published edition-1 HTML and worker from the pinned repository history, saves earlier notes, installs edition 2, and confirms that new content starts fresh while old notes remain archived. It also reloads the new edition offline with a saved worksheet. This check requires the Git repository history and a local HTTP preview. Summary: `verification-upgrade.json`.
 
+## Concept-first revision checks
+
+`verify_concepts.py` checks all 36 definitions and core explanations are project-independent, that all original technical topics remain, and that every rendered lesson puts definition, mechanism, everyday example and concept practice before a separate collapsed Jungle application. It also checks existing edition-2 progress and writing are retained, lesson navigation expands the project, responsive layout, and runtime errors. Summary: `verification-concepts.json`.
+
 ## Verification scope
 
 The browser workshop is a scripted rehearsal, not an LLM. The supplied tool scripts are tested as pure Code-node logic. An actual n8n instance, credential setup, AI Agent wiring and model-chosen tool calls were not run in this environment. They are explicit learner build steps with acceptance checks in the guide. No production Jungle API, availability, reservation, payment or private data access was tested or connected.
