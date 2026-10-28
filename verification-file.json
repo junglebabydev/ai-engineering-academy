@@ -1,0 +1,30 @@
+{
+  "mode": "file",
+  "checks": [
+    "36 lessons / 72 questions / 40 terms embedded",
+    "all lessons substantive and references valid",
+    "all 36 routes and all 72 quizzes work",
+    "incorrect answer explains and retry updates mastery",
+    "progress, quiz answers and notes survive reload",
+    "project checklist persists",
+    "global search returns lesson and glossary matches",
+    "search content safely escaped",
+    "RRF fixture calculation",
+    "agent completes, denies injection/tenant access, and bounds loops",
+    "cost and concurrency calculations",
+    "invalid lab inputs rejected",
+    "retrieval metric calculation",
+    "JSON export contains completed lesson and notes",
+    "invalid import preserves current state",
+    "invalid quiz backup rejected",
+    "reset clears only academy state",
+    "valid import restores progress, notes and projects",
+    "downloaded standalone HTML runs independently",
+    "responsive layouts and mobile navigation",
+    "standalone has zero HTTP requests",
+    "no JavaScript runtime errors",
+    "storage denial degrades visibly without blocking lessons"
+  ],
+  "count": 23,
+  "errors": []
+}
