@@ -1,5 +1,7 @@
 # AI Engineering Academy
 
+[Open the live academy](https://junglebabydev.github.io/ai-engineering-academy/) · [Download standalone HTML](https://github.com/junglebabydev/ai-engineering-academy/raw/refs/heads/main/index.html)
+
 A self-contained six-week study site for a TypeScript / Next.js / Supabase developer.
 
 ## Open offline
@@ -16,7 +18,11 @@ Open **Progress & setup → Export progress JSON** regularly. Import validates t
 
 Lesson completion is self-attested. Quiz mastery means both latest submitted answers in a lesson are correct. Neither is a certificate or a substitute for doing the project acceptance checks.
 
-## Deploy
+## Deployment on GitHub
+
+This repository is configured to publish `main` from its root directory through GitHub Pages. To update the academy, edit `build.py` (curriculum) or `template.html` (presentation), run `python3 build.py`, bump `CACHE_VERSION` in `sw.js` for a new edition, and commit the generated `index.html` with the changed source files. GitHub publishes the new revision automatically. Existing users should close old tabs and revisit online to activate an updated service worker.
+
+## Deploy elsewhere
 
 Publish the folder containing `index.html` and `sw.js`. There is no build command and no server runtime.
 
