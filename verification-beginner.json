@@ -1,0 +1,30 @@
+{
+  "edition": 2,
+  "url": "file:///Users/vaibhav/Documents/ChatGPT/Learning/academy-github/index.html",
+  "count": 22,
+  "checks": [
+    "earlier progress archived without marking new content complete",
+    "earlier notes readable and safely escaped",
+    "earlier-edition JSON export preserves original notes",
+    "activity and recall writing survive reload",
+    "technical depth and answers begin collapsed",
+    "recall practice uses completed lessons and saved writing",
+    "workshop enforces age/price and retains unknown availability",
+    "missing age asks rather than guesses",
+    "strict low budget produces no match",
+    "unknown price not silently treated as free",
+    "workshop unavailable",
+    "workshop injection",
+    "offline ZIP is structurally valid with complete build materials",
+    "catalogue CSV matches supplied version",
+    "new export preserves learning work and earlier archive",
+    "new edition import round-trip",
+    "earlier-tab saves do not erase new worksheets",
+    "invalid writing keys rejected",
+    "earlier backup import archives rather than inventing mastery",
+    "new views fit phone/tablet/desktop",
+    "new teaching interactions produce no runtime errors",
+    "supplied n8n scripts pass known-match, missing/invalid input, no-match, unknown-price, scope and ID tests"
+  ],
+  "scope": "Browser simulation and supplied Code-node logic. Live n8n/model wiring is not exercised."
+}

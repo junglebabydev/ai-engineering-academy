@@ -1,0 +1,8 @@
+id,name,interest,minAgeYears,maxAgeYears,priceSGD,district,level,availability,source,revision
+SWIM-01,Little Ripples Beginner Swim,swimming,4,6,40,Bukit Timah,beginner,unverified,Fictional learning catalogue,v1
+SWIM-02,Junior Swim Squad,swimming,8,12,35,Bukit Timah,advanced,unverified,Fictional learning catalogue,v1
+SWIM-03,Small Splash Premium,swimming,4,6,65,Bukit Timah,beginner,unverified,Fictional learning catalogue,v1
+ART-01,Messy Colours Studio,art,4,7,38,Bukit Timah,beginner,unverified,Fictional learning catalogue,v1
+ART-02,Eastside Creative Play,art,3,6,28,East,beginner,unverified,Fictional learning catalogue,v1
+OUTDOOR-01,Woodland Explorers,outdoor,5,9,45,Bukit Timah,beginner,unverified,Fictional learning catalogue,v1
+ART-03,Mystery Price Art,art,4,7,,Bukit Timah,beginner,unverified,Fictional learning catalogue,v1

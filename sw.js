@@ -1,9 +1,9 @@
 /* Offline cache for the optional hosted edition. Not used for file://. */
-const CACHE_VERSION = '1';
+const CACHE_VERSION = '2';
 const PREFIX = 'ai-academy:' + encodeURIComponent(self.registration.scope) + ':';
 const CACHE = PREFIX + CACHE_VERSION;
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['./', './index.html'])));
+  event.waitUntil(caches.open(CACHE).then(async cache => { await cache.addAll(['./', './index.html']); await self.skipWaiting(); }));
 });
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {

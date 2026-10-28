@@ -1,43 +1,39 @@
-# Verification
+# Edition 02 verification — 28 October 2026
 
-Verified on 27 October 2026 using installed Google Chrome with Playwright in a fresh, isolated browser profile. No live model or database credentials were used. No public hosting deployment was performed.
+The subject areas remain unchanged. The default teaching path is now beginner-oriented and centred on one Jungle parent concierge agent. Original technical content remains optional. No private Jungle source code or real customer records are included in the course or fixture pack.
 
-## Passed: standalone HTML
+## Core browser verification
 
-23 checks covered:
+`verify.py` exercises all 36 lesson routes and all 72 new quiz questions; wrong answers and retries; persistence of notes/completion/quiz state/checklists; search and safe text handling; four technical labs; JSON export/import rejection, reset and restore; standalone HTML download; phone/tablet/desktop layout and navigation; and visible storage-denial fallback.
 
-- 36 substantive lessons, 72 questions, 40 glossary entries and valid internal reference keys.
-- All 36 lesson routes and every correct quiz submission.
-- Wrong-answer explanations, retries and updated quiz mastery.
-- Completion, quiz answers, notes and project checklists persisting through reload.
-- Global search, no-match states and escaped untrusted search content.
-- Deterministic rank-fusion, bounded-agent, cost/concurrency and retrieval-metric calculations.
-- Invalid lab input handling.
-- JSON export, invalid format and invalid quiz-value rejection, reset and valid restore.
-- A downloaded standalone HTML copy opening independently.
-- No page-wide horizontal overflow across eight views at widths 390, 768 and 1440 pixels; mobile menu open/close.
-- Zero HTTP requests in direct file mode.
-- Zero JavaScript runtime errors.
-- A visible warning and usable lessons when localStorage access is blocked.
+Direct file mode checks that the app makes no HTTP requests. Local HTTP mode checks that the worker controls the page, the page reloads with networking disabled, and lesson 36 remains available offline. There are no JavaScript runtime errors in these checks. Reference links are optional online resources.
 
-## Passed: local HTTP hosted edition
+## Beginner-edition verification
 
-The same functional checks passed under a local HTTP server (23 checks). The mode-specific check confirmed that the service worker installs, controls the page, reloads while browser networking is disabled, and allows navigation to lesson 36 offline.
+`verify_beginner.py` checks:
 
-## Supplemental checks
+- Earlier-edition progress is archived and new content does not inherit old completion/mastery.
+- Earlier notes render as text and can be exported separately.
+- Activity and recall writing survives reload and appears in recall practice.
+- Worked checks and technical depth begin collapsed.
+- Workshop results enforce age, budget, area and interest; missing age prompts clarification.
+- Unknown prices are not treated as free; insufficient budgets produce no matches.
+- Unavailable tools and prohibited requests yield bounded, explicit outcomes.
+- The ZIP generated in the browser passes a ZIP integrity check and matches every supplied build-pack file byte-for-byte after text decoding.
+- Catalogue CSV download, current-edition backup round-trip, legacy import, malformed writing-map rejection, and old-tab save protection.
+- New views fit widths 390, 768 and 1440; no page-wide horizontal overflow.
+- Supplied search/details scripts execute against a simulated n8n `$input` object and pass known-match, invalid/missing age, budget/no-match, unknown-price, unknown-area and invented-ID tests.
 
-- JavaScript and service-worker syntax checked with Node.
-- Content-hashing snippet preserves literal regex/newline escapes.
-- Canceling a valid progress import preserves the current state.
-- Import file chooser is exposed through a keyboard-focusable button.
-- Mobile navigation is fully offscreen when closed.
-- An explicit `/index.html` URL also reloads offline through the worker.
-- Desktop and mobile layouts were visually inspected; the lesson reader, code blocks, quizzes and notes are legible and arranged vertically on phones.
+## Upgrade verification
 
-## Scope and limits
+`verify_upgrade.py` loads the published edition-1 HTML and worker from the pinned repository history, saves earlier notes, installs edition 2, and confirms that new content starts fresh while old notes remain archived. It also reloads the new edition offline with a saved worksheet. This check requires the Git repository history and a local HTTP preview. Summary: `verification-upgrade.json`.
 
-The tests validate the academy website and its deterministic demonstrations. The educational TypeScript/SQL snippets are examples, and some explicitly require user-provided adapters; they are not a complete live capstone application. Real model quality, database permissions, third-party API behavior, load capacity and user-built projects were not tested. Browser code blocks may scroll horizontally inside their own containers on small screens.
+## Verification scope
 
-Verification used Chrome. File-storage persistence can differ in Safari, Firefox and private browsing. Use JSON backups. Service-worker caches can be evicted and require an initial online visit. External references require the internet; their content is not bundled. Live hosting vendor dashboards and account settings may change.
+The browser workshop is a scripted rehearsal, not an LLM. The supplied tool scripts are tested as pure Code-node logic. An actual n8n instance, credential setup, AI Agent wiring and model-chosen tool calls were not run in this environment. They are explicit learner build steps with acceptance checks in the guide. No production Jungle API, availability, reservation, payment or private data access was tested or connected.
 
-Raw check summaries are included in the editable source archive as `verification-file.json` and `verification-hosted.json`. `verify.py` runs functional checks against a file URL by default or an HTTP URL supplied as its first argument; it needs Python Playwright and installed Chrome. It creates temporary test backups and screenshots in its own directory.
+Jungle code review informed the distinction between marketplace discovery, draft booking choices, session information and protected booking records. It does not establish the current behaviour of deployed services. Public examples are fictional and no live capacity/price promises are made.
+
+The tests use Chrome. Other browsers and private modes can handle file storage differently. Caches can be evicted. Use JSON backups, close old academy tabs, and revisit online for a new edition. No public load capacity, real-world model quality, booking safety or job outcome is claimed by these website checks.
+
+Raw summaries: `verification-file.json`, `verification-hosted.json`, and `verification-beginner.json`.

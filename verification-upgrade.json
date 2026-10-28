@@ -1,0 +1,9 @@
+{
+  "edition": 2,
+  "checks": [
+    "Edition-1 worker and stored notes upgrade to edition 2",
+    "New completion starts fresh and earlier notes remain archived",
+    "New edition and worksheets reload offline after upgrade"
+  ],
+  "count": 3
+}

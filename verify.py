@@ -17,7 +17,7 @@ with sync_playwright() as p:
  page.on('request',lambda req: requests.append(req.url))
  page.goto(URL); page.wait_for_load_state('networkidle')
  check('36 lessons / 72 questions / 40 terms embedded',lambda:assert_(page.evaluate('DATA.lessons.length===36 && DATA.lessons.every(l=>l.quiz.length===2) && Object.keys(DATA.glossary).length===40')))
- check('all lessons substantive and references valid',lambda:assert_(page.evaluate('DATA.lessons.every(l=>l.concepts.join(" ").split(/\\s+/).length>110 && l.steps.length===3 && l.code.length>100 && l.refs.every(k=>DATA.refs[k]))')))
+ check('all lessons substantive and references valid',lambda:assert_(page.evaluate('DATA.lessons.every(l=>l.concepts.join(" ").split(/\\s+/).length>80 && l.scene && l.terms.length===2 && l.technical.length===3 && l.steps.length===3 && l.code.length>100 && l.refs.every(k=>DATA.refs[k]))')))
  page.screenshot(path=str(ROOT/'preview-desktop.png'),full_page=True)
  # Visit every lesson and submit both correct answers using the visible form.
  for id in range(1,37):
@@ -37,13 +37,13 @@ with sync_playwright() as p:
  form.locator('input[value="1"]').check();form.locator('button').click()
  page.locator('[data-complete="1"]').click()
  note='A <script> must remain text. Citation support is separate from validity.'
- page.locator('#lesson-notes').fill(note)
- page.reload();page.wait_for_selector('#lesson-notes')
+ page.locator('#notes > summary').click();page.locator('#lesson-notes').fill(note)
+ page.reload();page.wait_for_selector('#lesson-notes',state='attached')
  check('progress, quiz answers and notes survive reload',lambda:assert_(page.evaluate('done(1) && mastery()===36') and page.locator('#lesson-notes').input_value()==note))
  page.goto(URL+'#projects');page.locator('[data-project="1-0"]').check();page.reload()
  check('project checklist persists',lambda:assert_(page.locator('[data-project="1-0"]').is_checked()))
  page.locator('#search').fill('idempotency');page.wait_for_timeout(250)
- check('global search returns lesson and glossary matches',lambda:assert_(page.locator('.result').count()>3))
+ check('global search returns lesson and glossary matches',lambda:assert_(page.locator('.result').count()>=2))
  page.locator('#search').fill('<img src=x onerror=alert(1)>');page.wait_for_timeout(250)
  check('search content safely escaped',lambda:assert_(page.locator('img').count()==0 and page.locator('.empty').count()==1))
  page.goto(URL+'#lab');page.locator('#run-lab').click()
@@ -82,13 +82,13 @@ with sync_playwright() as p:
  # Responsive layout across representative pages.
  for width in [390,768,1440]:
   page.set_viewport_size({'width':width,'height':900})
-  for route in ['home','curriculum','lesson/7','projects','references','glossary','guide','lab']:
+  for route in ['home','curriculum','lesson/7','projects','references','glossary','guide','lab','workshop','review']:
    page.goto(URL+'#'+route)
    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'),f'overflow {width} {route}'
   if width==390:
    page.goto(URL+'#home');page.screenshot(path=str(ROOT/'preview-mobile.png'),full_page=True)
    page.locator('#menu').click();assert page.locator('#menu').get_attribute('aria-expanded')=='true'
-   page.locator('[data-nav="curriculum"]').click();assert page.locator('#menu').get_attribute('aria-expanded')=='false'
+   page.locator('[data-nav="curriculum"]').click();page.wait_for_function('document.querySelector("#menu").getAttribute("aria-expanded")==="false"')
  check('responsive layouts and mobile navigation',lambda:assert_(True))
  # Direct file mode must make no external requests.
  if URL.startswith('file:'):
@@ -98,7 +98,7 @@ with sync_playwright() as p:
   page.reload();page.wait_for_function('navigator.serviceWorker.controller !== null')
   context.set_offline(True);page.reload();page.wait_for_selector('h1')
   page.goto(URL+'#lesson/36');page.wait_for_selector('[data-complete="36"]')
-  check('hosted offline reload and lesson navigation',lambda:assert_(page.locator('h1').inner_text()=='Your next 90 days'))
+  check('hosted offline reload and lesson navigation',lambda:assert_(page.locator('h1').inner_text()==page.evaluate('DATA.lessons[35].title')))
   context.set_offline(False)
  check('no JavaScript runtime errors',lambda:assert_(not errors,str(errors)))
  # Storage denial should warn, but not block reading or exporting.

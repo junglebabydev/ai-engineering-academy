@@ -5,3 +5,8 @@ preview-*.png
 test-progress.json
 test-offline-copy.html
 check-script.js
+test-legacy.json
+test-new-progress.json
+test-activities.csv
+test-build-pack.zip
+.qa-upgrade-*/
