@@ -12,15 +12,15 @@ with tempfile.TemporaryDirectory(prefix='.qa-upgrade-',dir=R) as tmp:
  url=origin+folder.name+'/'
  with sync_playwright() as p:
   b=p.chromium.launch(headless=True,channel='chrome');c=b.new_context();page=c.new_page();page.goto(url+'#guide')
-  page.wait_for_function('cacheStatus.startsWith("Hosted offline cache ready")');page.reload();page.wait_for_function('navigator.serviceWorker.controller!==null')
+  page.wait_for_function('cacheStatus.startsWith("Hosted offline cache ready")');page.reload(wait_until='domcontentloaded');page.wait_for_function('navigator.serviceWorker.controller!==null')
   page.evaluate('localStorage.setItem(KEY, JSON.stringify({version:1,completed:[1],answers:{"1-0":1},notes:{"1":"Saved before upgrade"},projects:{},lastLesson:1}))')
   for name in ['index.html','sw.js']:folder.joinpath(name).write_bytes((R/name).read_bytes())
   page.evaluate('navigator.serviceWorker.getRegistration().then(r=>r.update())')
-  page.wait_for_function('caches.keys().then(keys=>keys.some(k=>k.endsWith(":3")))')
-  page.reload();page.wait_for_function('DATA.edition===2')
+  page.wait_for_function('Promise.all([caches.keys(),navigator.serviceWorker.getRegistration()]).then(([keys,r])=>keys.some(k=>k.endsWith(":3")) && !r.installing && !r.waiting && r.active?.state==="activated")')
+  page.reload(wait_until='domcontentloaded');page.wait_for_function('DATA.edition===2')
   assert page.evaluate('state.completed.length===0 && state.legacy.notes[1]==="Saved before upgrade"')
   page.evaluate('state.activities[1]="New worksheet";persist()')
-  c.set_offline(True);page.reload();page.wait_for_selector('h1')
+  c.set_offline(True);page.reload(wait_until='domcontentloaded');page.wait_for_selector('h1')
   assert page.evaluate('DATA.edition===2 && state.activities[1]==="New worksheet" && state.legacy.notes[1]==="Saved before upgrade"')
   c.close();b.close()
 report={'edition':2,'checks':['Edition-1 worker and stored notes upgrade to edition 2','New completion starts fresh and earlier notes remain archived','New edition and worksheets reload offline after upgrade'],'count':3}
